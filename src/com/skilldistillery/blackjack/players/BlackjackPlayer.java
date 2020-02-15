@@ -10,4 +10,11 @@ public class BlackjackPlayer extends Player {
 	public BlackjackPlayer() {
 		hand = new BlackjackHand();
 	}
+
+	public Hand getHand() {
+		return hand;
+	}
+	
+	
+	
 }

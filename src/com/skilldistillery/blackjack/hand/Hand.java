@@ -1,9 +1,10 @@
 package com.skilldistillery.blackjack.hand;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import com.skilldistillery.blackjack.cards.Card;
+import com.skilldistillery.blackjack.players.Player;
 
 public abstract class Hand {
 	private List<Card> cards;
@@ -29,5 +30,10 @@ public abstract class Hand {
 		cards = new ArrayList<Card>();
 	}
 	
-	public abstract int getHandValue() ;
+	public List<Card> getCards(){
+		return cards;
+	}
+
+
+	public abstract int getHandValue();
 }

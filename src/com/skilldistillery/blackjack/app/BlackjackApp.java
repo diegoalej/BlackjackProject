@@ -1,34 +1,32 @@
 package com.skilldistillery.blackjack.app;
-
 import java.util.Scanner;
-
 import com.skilldistillery.blackjack.cards.Deck;
+import com.skilldistillery.blackjack.players.BlackjackDealer;
+import com.skilldistillery.blackjack.players.BlackjackPlayer;
 
 public class BlackjackApp {
+	private static BlackjackApp app = new BlackjackApp();
+	private static Scanner kb = new Scanner(System.in);
+	
 
 	public static void main(String[] args) {
-		Deck th = new Deck();
-		Scanner kb = new Scanner(System.in);
-		while (th.checkDeckSize() != 0) {
-			System.out.print("How many cards would you want? ");
-			int choice;
-			try {
-				choice = kb.nextInt();
-				if (choice <= th.checkDeckSize()) {
-					for (int i = 0; i < choice; i++) {
-						System.out.println(th.dealCard());
-					}
-				} else {
-					System.out.println("You cannot ask for more than 52 cards");
-				}
-			} catch (Exception e) {
-				System.out.println("Incorrect input, try again");
-			}
+		app.launch();
+		
+		
+	}
 
-		}
-		System.out.println("You ran out of cards!");
-
-		kb.close();
+	private void launch() {
+		Deck deck = new Deck();
+		BlackjackDealer dealer = new BlackjackDealer(deck);
+		BlackjackPlayer player = new BlackjackPlayer();
+		System.out.println("Welcome to Blackjack App ");
+		System.out.println("Let's play a hand ");
+		dealer.dealInitialHand(player);
+		System.out.println(player.getHand());
+		System.out.println(dealer.getHand());
+		
+		
+		
 	}
 
 }
