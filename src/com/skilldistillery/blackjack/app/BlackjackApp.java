@@ -22,11 +22,34 @@ public class BlackjackApp {
 		System.out.println("Welcome to Blackjack App ");
 		System.out.println("Let's play a hand ");
 		dealer.dealInitialHand(player);
-		System.out.println(player.getHand());
-		System.out.println(dealer.getHand());
+		playersTurn(player, dealer);
 		
 		
 		
+		
+	}
+	
+	private void playersTurn(BlackjackPlayer player, BlackjackDealer dealer) {
+		if(player.getHand().isBlackjack()) {
+			System.out.println("You end the turn with a total of " + player.getHand().getHandValue() + ", dealer's turn");
+		}
+		else {
+			while (!player.getHand().isBust()) {
+				System.out.print("Would you like to \n1) hit  \n2) stay\n>  ");
+				int choice = kb.nextInt();
+				if (choice == 1) {
+					dealer.dealAdditionalCard(player);
+					if(player.getHand().isBust()) {
+						break;
+					}
+				}
+				else if (choice == 2) {
+					System.out.println("You choose to stay with a total of " + player.getHand().getHandValue() + ", dealer's turn");
+					break;
+				}				
+			}
+			System.out.println(dealer.getClass().getSimpleName() + " has a " +  dealer.getHand());				
+		}
 	}
 
 }

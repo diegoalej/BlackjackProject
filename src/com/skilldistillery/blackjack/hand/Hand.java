@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.skilldistillery.blackjack.cards.Card;
-import com.skilldistillery.blackjack.players.Player;
 
 public abstract class Hand {
 	private List<Card> cards;
@@ -36,4 +35,8 @@ public abstract class Hand {
 
 
 	public abstract int getHandValue();
+
+	public abstract boolean isBust();
+
+	public abstract boolean isBlackjack();
 }
