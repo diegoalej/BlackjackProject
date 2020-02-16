@@ -27,14 +27,14 @@ public class BlackjackDealer extends BlackjackPlayer {
 			this.getHand().addCard(deck.dealCard());
 			System.out.println("You see it is a " + this.getHand().getCards().get(1));
 			
-			System.out.println(player.getHand());
+			System.out.println(player.getClass().getSimpleName() + "you have:\n" + player.getHand());
 		}
 		
 		public void dealAdditionalCard(Player player) {
 			System.out.println("Dealing additional card to " + player.getClass().getSimpleName() );
 			player.getHand().addCard(deck.dealCard());
 			System.out.println("You see it is a " + player.getHand().getCards().get((player.getHand().getCards().size()-1)));
-			System.out.println("You now have " + player.getHand());				
+			System.out.println(player.getClass().getSimpleName() + " you now have:\n" + player.getHand());				
 			
 		}
 		

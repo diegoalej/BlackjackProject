@@ -20,7 +20,7 @@ public class BlackjackHand extends Hand {
 			builder.append(" ");
 			}
 		}
-		builder.append("for a total of ");
+		builder.append("\nfor a total of ");
 		builder.append(getHandValue());
 		return builder.toString();
 	}
@@ -46,7 +46,7 @@ public class BlackjackHand extends Hand {
 			return false;			
 		}
 		else {
-			System.out.println("You busted with a total of " + this.getHandValue());
+			System.out.println("Busted with a total of " + this.getHandValue());
 			return true;
 		}
 	}
