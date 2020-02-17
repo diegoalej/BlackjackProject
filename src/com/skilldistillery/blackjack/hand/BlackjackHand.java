@@ -45,11 +45,7 @@ public class BlackjackHand extends Hand {
 	//Method tests different cases for all outcomes of hand
 	public boolean isBust() {
 		int totalHandValue = this.getHandValue();
-		if(totalHandValue == 21) {
-			System.out.println("Blackjack!");
-			return false;
-		}
-		else if(totalHandValue < 21) {
+		if(totalHandValue <= 21) {
 			return false;			
 		}
 		else if (totalHandValue > 21){

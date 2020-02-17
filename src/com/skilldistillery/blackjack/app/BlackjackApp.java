@@ -38,8 +38,16 @@ public class BlackjackApp {
 						}
 						dealer.dealInitialHand(player); //Deal initial hand
 						int playerTotal = playersTurn(player, dealer); //Player's turn 
-						int dealerTotal = dealersTurn(dealer); // Dealer's turn
-						determineWinner(playerTotal, dealerTotal); // Determine winner
+						if (playerTotal == 21) {// Player wins if blackjack
+							determineWinner(playerTotal, 0); 	
+						}
+						else if(playerTotal > 21) {// House wins if player busts
+							determineWinner(0,1);
+						}
+						else { 
+							int dealerTotal = dealersTurn(dealer); // Dealer's turn
+							determineWinner(playerTotal, dealerTotal); // Determine winner							
+						}
 						dealer.getHand().clear();
 						player.getHand().clear();
 						System.out.println("Would you like to play again?");
@@ -79,6 +87,10 @@ public class BlackjackApp {
 	// Method plays through player's choices
 	private int playersTurn(BlackjackPlayer player, BlackjackDealer dealer) {
 			while (!player.getHand().isBust()) {
+				if (player.getHand().isBlackjack()) {
+					System.out.println("You win!");
+					break;
+				}
 				System.out.print("Would you like to: \n1) Hit  \n2) Stay\n>  ");
 				try {
 					int choice = kb.nextInt();
@@ -87,8 +99,8 @@ public class BlackjackApp {
 						if (player.getHand().isBust()) {
 							break;
 						} else if (player.getHand().isBlackjack()) {
-							System.out.println("We do not recommend hits on 21, but you are free to choose!");
-							continue;
+							System.out.println("You win!");
+							break;
 						}
 					} else if (choice == 2) {
 						System.out.println("You choose to stay with a total of " + player.getHand().getHandValue()
@@ -115,15 +127,14 @@ public class BlackjackApp {
 				if (dealer.getHand().isBust()) {
 					break;
 				}
+				else {
+					totalHandValue += dealer.getHand().getCards().get((dealer.getHand().getCards().size()-1)).getRank().getValue();										 
+				}
 				if(totalHandValue > 10) {
 					if(dealer.getHand().getCards().get((dealer.getHand().getCards().size()-1)).getRank().getValue() == 11) {
-						totalHandValue += 1;
+						totalHandValue -= 10;
 						continue; 
 					}					
-				}
-				else {
-					totalHandValue += dealer.getHand().getCards().get((dealer.getHand().getCards().size()-1)).getRank().getValue();										
-					continue; 
 				}
 		}
 		if (totalHandValue >= 17) {			
