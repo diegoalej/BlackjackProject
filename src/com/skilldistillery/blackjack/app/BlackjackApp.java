@@ -1,7 +1,7 @@
 package com.skilldistillery.blackjack.app;
 
 import java.util.Scanner;
-import com.skilldistillery.blackjack.cards.Deck;
+import com.skilldistillery.blackjack.cards.*;
 import com.skilldistillery.blackjack.players.BlackjackDealer;
 import com.skilldistillery.blackjack.players.BlackjackPlayer;
 
@@ -21,7 +21,7 @@ public class BlackjackApp {
 		mainMenu(player, dealer);
 		
 	}
-
+	
 	private void mainMenu(BlackjackPlayer player, BlackjackDealer dealer) {
 		System.out.println("Welcome to Blackjack App ");
 		int userChoice = 3;
@@ -34,9 +34,9 @@ public class BlackjackApp {
 				if (userChoice == 1) {
 					while(userChoice != 2) {
 						dealer.dealInitialHand(player);
-						playersTurn(player, dealer);
-						dealersTurn(dealer);
-						determineWinner(player, dealer);
+						int playerTotal = playersTurn(player, dealer);
+						int dealerTotal = dealersTurn(dealer);
+						determineWinner(playerTotal, dealerTotal);
 						System.out.println("there are " + dealer.getDeck().checkDeckSize() + " cards left in the deck" );
 						dealer.getHand().clear();
 						player.getHand().clear();
@@ -79,7 +79,7 @@ public class BlackjackApp {
 		}
 	}
 
-	private void playersTurn(BlackjackPlayer player, BlackjackDealer dealer) {
+	private int playersTurn(BlackjackPlayer player, BlackjackDealer dealer) {
 		if(player.getHand().isBlackjack()) {
 			System.out.println("We do not allow hits on 21, but congratulations on your Blackjack!");
 		}
@@ -94,8 +94,8 @@ public class BlackjackApp {
 							break;
 						}
 						else if(player.getHand().isBlackjack()) {
-							System.out.println("We do not allow hits on 21, but congratulations on your Blackjack!");
-							break;
+							System.out.println("We do not recommend hits on 21, but you are free to choose!");
+							continue;
 						}
 					} else if (choice == 2) {
 						System.out.println(
@@ -113,31 +113,34 @@ public class BlackjackApp {
 				}
 			}
 		}
+		return player.getHand().getHandValue();
 	}
 
-	private void dealersTurn(BlackjackDealer dealer) {
+	private int dealersTurn(BlackjackDealer dealer) {
 		System.out.println(dealer.getClass().getSimpleName() + " has a " + dealer.getHand());
 		while (!dealer.getHand().isBust()) {
 			if (dealer.getHand().getHandValue() < 17) {
 				dealer.dealAdditionalCard(dealer);
-				if (dealer.getHand().isBust()) {
-					break;
-				}
-				continue;
-			} else
-				System.out.println("Dealer ends turn with a total of " + dealer.getHand().getHandValue());
-			break;
+			} 
+			if (dealer.getHand().isBust()) {
+				break;
+			}
+			else {
+				System.out.println("Dealer ends turn with a total of " + dealer.getHand().getHandValue());				
+				break;
+			}
 		}
+		return dealer.getHand().getHandValue();
 	}
 
-	private void determineWinner(BlackjackPlayer player, BlackjackDealer dealer) {
-		if (player.getHand().getHandValue() > 21) {
+	private void determineWinner(int playerTotal, int dealerTotal) {
+		if (playerTotal > 21) {
 			System.out.println("House wins!");
-		} else if (dealer.getHand().getHandValue() > 21 && player.getHand().getHandValue() <= 21) {
+		} else if (dealerTotal > 21 && playerTotal <= 21) {
 			System.out.println("You beat the house!");
-		} else if (player.getHand().getHandValue() <= dealer.getHand().getHandValue()) {
+		} else if (playerTotal <= dealerTotal) {
 			System.out.println("House wins!");
-		} else if (player.getHand().getHandValue() > dealer.getHand().getHandValue()) {
+		} else if (playerTotal > dealerTotal) {
 			System.out.println("You beat the house! ");
 		}
 

@@ -1,5 +1,6 @@
 package com.skilldistillery.blackjack.hand;
 
+import com.skilldistillery.blackjack.cards.Card;
 
 public class BlackjackHand extends Hand {
 
@@ -31,6 +32,14 @@ public class BlackjackHand extends Hand {
 		for (int i = 0; i < this.getCards().size(); i++) {
 			cardTotalValue += this.getCards().get(i).getRank().getValue();
 		}
+		if (cardTotalValue > 21) {
+			for (Card card : (this.getCards())) {
+				if(card.getRank().getValue() == 11) {
+					System.out.println("Ace is low on this hand");
+					cardTotalValue -= 10;
+				}
+			}
+		}	
 		return cardTotalValue;
 	}
 	
