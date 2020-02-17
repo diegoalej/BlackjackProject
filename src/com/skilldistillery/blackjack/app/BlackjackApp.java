@@ -38,8 +38,9 @@ public class BlackjackApp {
 						}
 						dealer.dealInitialHand(player); //Deal initial hand
 						int playerTotal = playersTurn(player, dealer); //Player's turn 
-						if (playerTotal == 21) {// Player wins if blackjack
-							determineWinner(playerTotal, 0); 	
+						if (playerTotal == 21) {// If player has blackjack
+							int dealerTotal = dealersTurn(dealer); // Dealer's turn
+							determineWinner(playerTotal, dealerTotal); 	
 						}
 						else if(playerTotal > 21) {// House wins if player busts
 							determineWinner(0,1);
