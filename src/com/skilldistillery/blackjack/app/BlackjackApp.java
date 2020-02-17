@@ -98,7 +98,7 @@ public class BlackjackApp {
 					if (choice == 1) {
 						dealer.dealAdditionalCard(player);
 						if (player.getHand().isBlackjack()) {
-							System.out.println("You win!");
+//							System.out.println("You win!");
 							break;
 						} else if (player.getHand().isBust()) {
 							break;
