@@ -96,12 +96,12 @@ public class BlackjackApp {
 					int choice = kb.nextInt();
 					if (choice == 1) {
 						dealer.dealAdditionalCard(player);
-						if (player.getHand().isBust()) {
-							break;
-						} else if (player.getHand().isBlackjack()) {
+						if (player.getHand().isBlackjack()) {
 							System.out.println("You win!");
 							break;
-						}
+						} else if (player.getHand().isBust()) {
+							break;
+						} 
 					} else if (choice == 2) {
 						System.out.println("You choose to stay with a total of " + player.getHand().getHandValue()
 								+ ", dealer's turn \n");

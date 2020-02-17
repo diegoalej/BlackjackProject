@@ -35,7 +35,7 @@ public class BlackjackHand extends Hand {
 		if (cardTotalValue > 21) {// Conditional for Ace as 1 or 11
 			for (Card card : (this.getCards())) {
 				if(card.getRank().getValue() == 11) {
-					System.out.println("Ace is low on this hand");
+//					System.out.println("Ace is low on this hand");
 					cardTotalValue -= 10;
 				}
 			}
