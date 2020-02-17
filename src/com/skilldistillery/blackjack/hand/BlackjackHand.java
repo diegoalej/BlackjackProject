@@ -32,7 +32,7 @@ public class BlackjackHand extends Hand {
 		for (int i = 0; i < this.getCards().size(); i++) {
 			cardTotalValue += this.getCards().get(i).getRank().getValue();
 		}
-		if (cardTotalValue > 21) {
+		if (cardTotalValue > 21) {// Conditional for Ace as 1 or 11
 			for (Card card : (this.getCards())) {
 				if(card.getRank().getValue() == 11) {
 					System.out.println("Ace is low on this hand");
@@ -42,29 +42,27 @@ public class BlackjackHand extends Hand {
 		}	
 		return cardTotalValue;
 	}
-	
+	//Method tests different cases for all outcomes of hand
 	public boolean isBust() {
-		int cardTotalValue = 0;
-		for (int i = 0; i < this.getCards().size(); i++) {
-			cardTotalValue += this.getCards().get(i).getRank().getValue();
+		int totalHandValue = this.getHandValue();
+		if(totalHandValue == 21) {
+			System.out.println("Blackjack!");
+			return false;
 		}
-		if(cardTotalValue == 21) {
-			return this.isBlackjack();
-		}
-		else if(cardTotalValue < 21) {
+		else if(totalHandValue < 21) {
 			return false;			
 		}
-		else {
-			System.out.println("Busted with a total of " + this.getHandValue());
+		else if (totalHandValue > 21){
+			System.out.println("Busted with a total of " + totalHandValue);
 			return true;
+		}
+		else {
+			return false;
 		}
 	}
 	
 	public boolean isBlackjack() {
-		int cardTotalValue = 0;
-		for (int i = 0; i < this.getCards().size(); i++) {
-			cardTotalValue += this.getCards().get(i).getRank().getValue();
-		}
+		int cardTotalValue = this.getHandValue();
 		if(cardTotalValue == 21) {
 			System.out.println("Blackjack!");
 			return true;

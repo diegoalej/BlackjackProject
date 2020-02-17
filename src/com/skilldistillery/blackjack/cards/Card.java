@@ -26,7 +26,21 @@ public class Card {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(rank.getValue());
+		if(rank.getValue() == 11) {
+			builder.append("Ace");
+		}		
+		else if(rank == Rank.KING) {
+			builder.append("King");
+		}		
+		else if(rank == Rank.QUEEN) {
+			builder.append("Queen");
+		}		
+		else if(rank == Rank.JACK) {
+			builder.append("Jack");
+		}		
+		else {
+			builder.append(rank.getValue());			
+		}
 		builder.append(" of ");
 		builder.append(suit);
 		return builder.toString();

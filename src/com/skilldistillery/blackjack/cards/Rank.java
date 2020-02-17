@@ -24,4 +24,5 @@ ACE(11);
 	public int getValue() {
 		return value;
 	}
+	
 }
